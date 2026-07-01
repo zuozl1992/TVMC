@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-
+if(WIN32)
+    set(FFMPEG_DIR D:/WorkSpace/ThirdParty/FFmpeg/win_64_8_1_2)
+endif()
 # Platform detection and FFmpeg discovery
 include(cmake/Platform.cmake)
 include(cmake/FindFFmpeg.cmake)

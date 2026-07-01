@@ -14,7 +14,7 @@ endif()
 IF(MACOS)
     set(FFMPEG_DIR /opt/homebrew/Cellar/ffmpeg/8.1.1)
 ELSEIF(WINDOWS)
-    set(FFMPEG_DIR D:/WorkSpace/ThirdParty/FFmpeg/win_x64_7_1_1)
+    set(FFMPEG_DIR D:/WorkSpace/ThirdParty/FFmpeg/win_64_8_1_2)
 ENDIF()
 # 相当于-I
 include_directories(${FFMPEG_DIR}/include)
