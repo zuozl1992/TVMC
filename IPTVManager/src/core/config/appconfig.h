@@ -15,6 +15,20 @@ class AppConfig : public QObject
 {
     Q_OBJECT
 
+    //QML可访问的属性
+    Q_PROPERTY(QString httpUrl READ httpUrl WRITE setHttpUrl NOTIFY configChanged)
+    Q_PROPERTY(QString fileUrl READ fileUrl WRITE setFileUrl NOTIFY configChanged)
+    Q_PROPERTY(QString groupAddress READ groupAddress WRITE setGroupAddress NOTIFY configChanged)
+    Q_PROPERTY(QString groupPort READ groupPort WRITE setGroupPort NOTIFY configChanged)
+    Q_PROPERTY(int urlTypeIndex READ urlTypeIndex WRITE setUrlTypeIndex NOTIFY configChanged)
+    Q_PROPERTY(bool addTestEnabled READ addTestEnabled WRITE setAddTestEnabled NOTIFY configChanged)
+    Q_PROPERTY(bool outByOne READ outByOne WRITE setOutByOne NOTIFY configChanged)
+    Q_PROPERTY(bool mergeChannels READ mergeChannels WRITE setMergeChannels NOTIFY configChanged)
+    Q_PROPERTY(bool addLogoEnabled READ addLogoEnabled WRITE setAddLogoEnabled NOTIFY configChanged)
+    Q_PROPERTY(bool addHdSuffix READ addHdSuffix WRITE setAddHdSuffix NOTIFY configChanged)
+    Q_PROPERTY(QString fccUrl READ fccUrl WRITE setFccUrl NOTIFY configChanged)
+    Q_PROPERTY(bool fccEnabled READ fccEnabled WRITE setFccEnabled NOTIFY configChanged)
+
 public:
     /** @brief 获取单例实例 */
     static AppConfig *instance();
@@ -83,6 +97,10 @@ public:
     /** @brief 获取/设置选中的频道分组 */
     QStringList selectedGroups() const;
     void setSelectedGroups(const QStringList &groups);
+
+signals:
+    /** @brief 配置变更信号 */
+    void configChanged();
 
 private:
     explicit AppConfig(QObject *parent = nullptr);

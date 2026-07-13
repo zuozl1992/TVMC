@@ -1,8 +1,11 @@
 #include "core/config/appconfig.h"
 #include "core/logging/logmanager.h"
-#include "ui/mainwindow.h"
+#include "ui/scanner_backend.h"
 
-#include <QApplication>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQuickStyle>
 #include <QTranslator>
 #include <QLocale>
 #include <QStandardPaths>
@@ -10,10 +13,13 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     app.setApplicationName("IPTVScanner");
-    app.setApplicationVersion("2.0.0");
+    app.setApplicationVersion("2.1.0");
     app.setOrganizationName("IPTVScanner");
+
+    //设置Material样式
+    QQuickStyle::setStyle("Material");
 
     //加载翻译文件
     QTranslator *translator = new QTranslator(&app);
@@ -42,8 +48,25 @@ int main(int argc, char *argv[])
     Iptv::Core::AppConfig::instance()->init(configPath);
     qInfo() << "Config loaded from:" << configPath;
 
-    Iptv::Ui::MainWindow mainWindow;
-    mainWindow.show();
+    //创建QML桥接后端
+    Iptv::Ui::ScannerBackend backend;
+
+    //创建QML引擎
+    QQmlApplicationEngine engine;
+
+    //添加QML组件导入路径
+    engine.addImportPath(":/qml/components");
+
+    //注册后端到QML上下文
+    engine.rootContext()->setContextProperty("backend", &backend);
+
+    //加载主QML文件
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+
+    if (engine.rootObjects().isEmpty()) {
+        qCritical() << "Failed to load QML";
+        return -1;
+    }
 
     qInfo() << "Application started.";
     return app.exec();

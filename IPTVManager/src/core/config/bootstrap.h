@@ -20,6 +20,9 @@ public:
     /** @brief 获取数据库文件路径 */
     QString dbPath() const;
 
+    /** @brief 获取引导文件路径 */
+    QString bootstrapPath() const;
+
     /** @brief 设置配置文件路径 */
     void setConfigPath(const QString &path);
 

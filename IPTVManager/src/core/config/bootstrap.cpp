@@ -29,6 +29,11 @@ QString Bootstrap::dbPath() const
     return m_dbPath;
 }
 
+QString Bootstrap::bootstrapPath() const
+{
+    return m_bootstrapPath;
+}
+
 void Bootstrap::setConfigPath(const QString &path)
 {
     m_configPath = path;

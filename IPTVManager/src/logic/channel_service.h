@@ -17,6 +17,8 @@ struct ExportOptions;
 
 namespace Iptv::Logic {
 
+class GuideManager;
+
 /**
  * @brief 频道业务服务类
  *        封装频道和信号源的增删改查及导入导出逻辑
@@ -28,6 +30,7 @@ class ChannelService : public QObject
 public:
     explicit ChannelService(Database::ChannelRepository *channelRepo,
                             Database::SourceRepository *sourceRepo,
+                            GuideManager *guideManager = nullptr,
                             QObject *parent = nullptr);
 
     /** @brief 添加频道
@@ -57,7 +60,22 @@ public:
     /** @brief 删除所有频道 */
     bool removeAllChannels();
 
-    /** @brief 从TXT文件导入频道数据
+    /** @brief 从文件导入频道数据（根据扩展名自动识别格式）
+     *  @param filePath 文件路径
+     *  @return 导入的记录数，失败返回-1 */
+    int importFromFile(const QString &filePath);
+
+    /** @brief 从MC文件导入频道数据（自定义格式）
+     *  @param filePath MC文件路径
+     *  @return 导入的记录数，失败返回-1 */
+    int importFromMc(const QString &filePath);
+
+    /** @brief 从M3U文件导入频道数据
+     *  @param filePath M3U文件路径
+     *  @return 导入的记录数，失败返回-1 */
+    int importFromM3u(const QString &filePath);
+
+    /** @brief 从TXT文件导入频道数据（播放列表格式）
      *  @param filePath TXT文件路径
      *  @return 导入的记录数，失败返回-1 */
     int importFromTxt(const QString &filePath);
@@ -77,6 +95,7 @@ public:
 private:
     Database::ChannelRepository *m_channelRepo; ///< 频道数据仓库
     Database::SourceRepository *m_sourceRepo;   ///< 信号源数据仓库
+    GuideManager *m_guideManager;               ///< 频道指南管理器
 };
 
 } // namespace Iptv::Logic

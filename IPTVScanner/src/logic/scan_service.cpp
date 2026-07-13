@@ -101,9 +101,19 @@ void ScanService::start()
             probe->start();
         }
 
-        //等待所有活跃探测器完成
-        while ((int)m_activeCount > 0) {
+        //等待所有活跃探测器完成（检查退出标志）
+        while ((int)m_activeCount > 0 && !(int)m_exitFlag) {
             QThread::msleep(10);
+        }
+
+        //如果是因为退出标志而结束，清理剩余探测器
+        if ((int)m_exitFlag) {
+            m_mutex.lock();
+            for (auto *probe : m_probes) {
+                probe->quit();
+                probe->wait(500);
+            }
+            m_mutex.unlock();
         }
 
         emit scanFinished();

@@ -120,6 +120,22 @@ QStringList SourceRepository::allIps()
     return ips;
 }
 
+QStringList SourceRepository::tsIps()
+{
+    QSqlQuery query(*m_db);
+    //查询TS类型（type=0）的信号源IP
+    if (!query.exec("SELECT DISTINCT ip FROM tv_source_info WHERE type = 0")) {
+        return {};
+    }
+    
+    QStringList ips;
+    while (query.next()) {
+        ips.append(query.value(0).toString());
+    }
+    
+    return ips;
+}
+
 QJsonArray SourceRepository::getCheckList(bool normalType, int order)
 {
     QSqlQuery query(*m_db);

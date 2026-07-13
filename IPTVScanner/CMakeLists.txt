@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(IPTVScanner VERSION 2.0.0 LANGUAGES CXX)
+project(IPTVScanner VERSION 2.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -16,7 +16,7 @@ include(cmake/Platform.cmake)
 include(cmake/FindFFmpeg.cmake)
 
 # Qt6
-find_package(Qt6 6.8 REQUIRED COMPONENTS Core Widgets LinguistTools)
+find_package(Qt6 6.8 REQUIRED COMPONENTS Core Quick QuickControls2 LinguistTools)
 
 # Application modules
 add_subdirectory(src/core)
@@ -50,7 +50,7 @@ target_link_libraries(IPTVScanner PRIVATE
     iptv_multimedia
     iptv_logic
     iptv_ui
-    Qt::Core Qt::Widgets
+    Qt::Core Qt::Quick Qt::QuickControls2
 )
 
 # Translations

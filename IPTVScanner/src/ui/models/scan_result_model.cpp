@@ -29,7 +29,18 @@ QVariant ScanResultModel::data(const QModelIndex &index, int role) const
 
     const Multimedia::StreamInfo &info = m_results.at(index.row());
 
-    //返回各列的显示数据
+    //处理自定义角色（QML使用）
+    if (role >= UrlRole) {
+        switch (role) {
+        case UrlRole: return info.url;
+        case WidthRole: return info.width;
+        case HeightRole: return info.height;
+        case FpsRole: return info.fps;
+        case SourceTypeRole: return Multimedia::FfmpegUtils::sourceTypeName(info.sourceType);
+        }
+    }
+
+    //处理标准DisplayRole（TableView使用）
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
         case ColUrl:
@@ -46,6 +57,17 @@ QVariant ScanResultModel::data(const QModelIndex &index, int role) const
     }
 
     return {};
+}
+
+QHash<int, QByteArray> ScanResultModel::roleNames() const
+{
+    return {
+        { UrlRole, "url" },
+        { WidthRole, "width" },
+        { HeightRole, "height" },
+        { FpsRole, "fps" },
+        { SourceTypeRole, "sourceType" }
+    };
 }
 
 QVariant ScanResultModel::headerData(int section, Qt::Orientation orientation, int role) const

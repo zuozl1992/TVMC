@@ -39,6 +39,9 @@ public:
     /** @brief 获取所有信号源IP列表 */
     QStringList allIps();
 
+    /** @brief 获取TS类型信号源IP列表 */
+    QStringList tsIps();
+
     /** @brief 获取检测列表
      *  @param normalType true=正常源，false=异常源
      *  @param order      排序方式（0=按IP，1=按分辨率） */

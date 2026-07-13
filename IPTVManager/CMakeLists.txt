@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.19)
-project(IPTVManager VERSION 2.0.0 LANGUAGES CXX)
+project(IPTVManager VERSION 2.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+
+# 禁用QML调试
+set(QT_QML_DEBUG OFF)
 if(WIN32)
     set(FFMPEG_DIR D:/WorkSpace/ThirdParty/FFmpeg/win_64_8_1_2)
 endif()
@@ -15,7 +18,7 @@ include(cmake/FindFFmpeg.cmake)
 
 # Qt6
 find_package(Qt6 6.8 REQUIRED COMPONENTS
-    Core Widgets Network Sql OpenGLWidgets LinguistTools)
+    Core Quick QuickControls2 Network Sql LinguistTools)
 
 # QXlsx (cross-platform Excel export)
 add_subdirectory(third_party/qxlsx)
@@ -59,7 +62,7 @@ target_link_libraries(IPTVManager PRIVATE
     iptv_export
     iptv_logic
     iptv_ui
-    Qt::Core Qt::Widgets Qt::Sql Qt::OpenGLWidgets Qt::Network
+    Qt::Core Qt::Quick Qt::QuickControls2 Qt::Sql Qt::Network
 )
 
 # Translations

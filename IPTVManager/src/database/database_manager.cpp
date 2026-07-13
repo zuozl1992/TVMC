@@ -74,7 +74,21 @@ bool DatabaseManager::resetToDefault()
     QFile::setPermissions(m_dbPath, QFile::ReadOwner | QFile::WriteOwner);
     
     //重新打开数据库
-    return open();
+    if (!open()) {
+        return false;
+    }
+    
+    //清理备份表（以_开头的表）
+    QSqlQuery query(m_db);
+    QStringList tables = m_db.tables();
+    for (const QString &table : tables) {
+        if (table.startsWith("_")) {
+            query.exec(QString("DROP TABLE IF EXISTS \"%1\"").arg(table));
+            qInfo() << "Dropped backup table:" << table;
+        }
+    }
+    
+    return true;
 }
 
 QSqlDatabase *DatabaseManager::database()

@@ -50,6 +50,7 @@ QString AppConfig::httpUrl() const
 void AppConfig::setHttpUrl(const QString &url)
 {
     setValue(ConfigKeys::HTTP_URL, url);
+    emit configChanged();
 }
 
 QString AppConfig::fileUrl() const
@@ -60,6 +61,7 @@ QString AppConfig::fileUrl() const
 void AppConfig::setFileUrl(const QString &url)
 {
     setValue(ConfigKeys::FILE_URL, url);
+    emit configChanged();
 }
 
 QString AppConfig::groupAddress() const
@@ -70,6 +72,7 @@ QString AppConfig::groupAddress() const
 void AppConfig::setGroupAddress(const QString &addr)
 {
     setValue(ConfigKeys::GROUP_URL, addr);
+    emit configChanged();
 }
 
 QString AppConfig::groupPort() const
@@ -80,6 +83,7 @@ QString AppConfig::groupPort() const
 void AppConfig::setGroupPort(const QString &port)
 {
     setValue(ConfigKeys::GROUP_PORT, port);
+    emit configChanged();
 }
 
 int AppConfig::urlTypeIndex() const
@@ -90,6 +94,7 @@ int AppConfig::urlTypeIndex() const
 void AppConfig::setUrlTypeIndex(int index)
 {
     setValue(ConfigKeys::GROUP_TYPE, index);
+    emit configChanged();
 }
 
 bool AppConfig::addTestEnabled() const
@@ -100,6 +105,7 @@ bool AppConfig::addTestEnabled() const
 void AppConfig::setAddTestEnabled(bool enabled)
 {
     setValue(ConfigKeys::GROUP_ADD_TEST, enabled);
+    emit configChanged();
 }
 
 bool AppConfig::outByOne() const
@@ -110,6 +116,7 @@ bool AppConfig::outByOne() const
 void AppConfig::setOutByOne(bool enabled)
 {
     setValue(ConfigKeys::OUT_BY_ONE, enabled);
+    emit configChanged();
 }
 
 bool AppConfig::mergeChannels() const
@@ -120,6 +127,7 @@ bool AppConfig::mergeChannels() const
 void AppConfig::setMergeChannels(bool enabled)
 {
     setValue(ConfigKeys::TV_MERGE, enabled);
+    emit configChanged();
 }
 
 bool AppConfig::addLogoEnabled() const
@@ -130,6 +138,7 @@ bool AppConfig::addLogoEnabled() const
 void AppConfig::setAddLogoEnabled(bool enabled)
 {
     setValue(ConfigKeys::OUT_ADD_LOGO, enabled);
+    emit configChanged();
 }
 
 bool AppConfig::addHdSuffix() const
@@ -140,6 +149,7 @@ bool AppConfig::addHdSuffix() const
 void AppConfig::setAddHdSuffix(bool enabled)
 {
     setValue(ConfigKeys::OUT_ADD_HD, enabled);
+    emit configChanged();
 }
 
 QString AppConfig::fccUrl() const
@@ -150,6 +160,7 @@ QString AppConfig::fccUrl() const
 void AppConfig::setFccUrl(const QString &url)
 {
     setValue(ConfigKeys::FCC_URL, url);
+    emit configChanged();
 }
 
 bool AppConfig::fccEnabled() const
@@ -160,6 +171,7 @@ bool AppConfig::fccEnabled() const
 void AppConfig::setFccEnabled(bool enabled)
 {
     setValue(ConfigKeys::FCC_USE, enabled);
+    emit configChanged();
 }
 
 QStringList AppConfig::selectedGroups() const
@@ -170,6 +182,7 @@ QStringList AppConfig::selectedGroups() const
 void AppConfig::setSelectedGroups(const QStringList &groups)
 {
     setValue(ConfigKeys::TV_GROUP_SELECT, groups);
+    emit configChanged();
 }
 
 } // namespace Iptv::Core
