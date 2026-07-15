@@ -6,7 +6,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Qt Version](https://img.shields.io/badge/Qt-6.8.3-green.svg)](https://www.qt.io)
-[![Platform](https://img.shields.io/badge/Platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
+[![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows-lightgrey.svg)]()
 
 </div>
 
@@ -18,29 +18,33 @@ TVMC is a powerful IPTV channel management and streaming scan tool that integrat
 
 This project uses MiMoCode (Xiaomi's mimo-v2.5-pro AI model) for code generation and optimization.
 
+> 📚 **Detailed Documentation**
+> - [Quick Start Guide](docs/QUICKSTART_EN.md) - Learn how to quickly get started with TVMC
+> - [Channel Scan Guide](docs/SCAN_GUIDE_EN.md) - Detailed instructions for using the scanning feature
+
 ## 📸 Screenshots
 
 <div align="center">
 
 **Channel Edit**
 
-![Channel Edit](docs/assets/page_1.png)
+![Channel Edit](docs/assets/page_1_en.png)
 
 **Channel Browse**
 
-![Channel Browse](docs/assets/page_2.png)
+![Channel Browse](docs/assets/page_2_en.png)
 
 **Channel Check**
 
-![Channel Check](docs/assets/page_3.png)
+![Channel Check](docs/assets/page_3_en.png)
 
 **Channel Scan**
 
-![Channel Scan](docs/assets/page_4.png)
+![Channel Scan](docs/assets/page_4_en.png)
 
 **Settings**
 
-![Settings](docs/assets/page_5.png)
+![Settings](docs/assets/page_5_en.png)
 
 </div>
 
@@ -76,9 +80,11 @@ This project uses MiMoCode (Xiaomi's mimo-v2.5-pro AI model) for code generation
 
 ## 🖥️ System Requirements
 
-- **Operating System**: macOS 12.0、Windows 10 or later
+- **Operating System**: macOS 12.0+ or Windows 10+
 - **Qt Version**: Qt 6.8.3
-- **Compiler**: Xcode Command Line Tools (Apple Clang)
+- **Compiler**:
+  - macOS: Xcode Command Line Tools (Apple Clang)
+  - Windows: MSVC 2019+ or MinGW
 - **Build Tool**: CMake 3.19+
 - **FFmpeg**: avformat, avutil, avcodec, swscale
 
@@ -237,17 +243,17 @@ http://192.168.1.1:12345/udp/239.49.0.{[1-255]}:{6000#[8000-9999]}
 The project uses a layered architecture:
 
 ```
-┌─────────────────────────────────┐
-│         QML UI Layer            │
-├─────────────────────────────────┤
-│       Bridge Layer              │
-├─────────────────────────────────┤
-│        Logic Layer              │
-├─────────────────────────────────┤
-│   Database/Network/Multimedia   │
-├─────────────────────────────────┤
-│         Core Layer              │
-└─────────────────────────────────┘
+┌──────────────────┐
+│         QML UI Layer         │
+├──────────────────┤
+│       Bridge Layer           │
+├──────────────────┤
+│        Logic Layer           │
+├──────────────────┤
+│  Database/Network/Multimedia │
+├──────────────────┤
+│         Core Layer           │
+└──────────────────┘
 ```
 
 - **Core Layer**: Configuration management, logging system
