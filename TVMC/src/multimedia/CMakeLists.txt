@@ -1,8 +1,13 @@
 add_library(iptv_multimedia STATIC
+    stream_info.h
     stream_info.cpp
+    video_decoder.h
     video_decoder.cpp
+    stream_probe.h
     stream_probe.cpp
+    scanner_stream_probe.h
     scanner_stream_probe.cpp
+    ffmpeg_utils.h
     ffmpeg_utils.cpp
 )
 

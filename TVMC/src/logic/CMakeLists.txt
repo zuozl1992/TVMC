@@ -1,9 +1,15 @@
 add_library(iptv_logic STATIC
+    channel_service.h
     channel_service.cpp
+    check_service.h
     check_service.cpp
+    url_builder.h
     url_builder.cpp
+    tvlist_builder.h
     tvlist_builder.cpp
+    guide_manager.h
     guide_manager.cpp
+    scan_service.h
     scan_service.cpp
 )
 

@@ -1,5 +1,7 @@
 add_library(iptv_network STATIC
+    httpclient.h
     httpclient.cpp
+    logo_fetcher.h
     logo_fetcher.cpp
 )
 

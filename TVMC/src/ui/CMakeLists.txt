@@ -4,16 +4,25 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 add_library(iptv_ui STATIC
+    manager_backend.h
     manager_backend.cpp
+    scanner_backend.h
     scanner_backend.cpp
+    language_manager.h
     language_manager.cpp
-    video_frame_provider.cpp
+    frame_image_provider.h
     frame_image_provider.cpp
+    logo_image_provider.h
     logo_image_provider.cpp
+    setup_helper.h
     setup_helper.cpp
+    models/check_list_model.h
     models/check_list_model.cpp
+    models/channel_table_model.h
     models/channel_table_model.cpp
+    models/source_table_model.h
     models/source_table_model.cpp
+    models/scan_result_model.h
     models/scan_result_model.cpp
 )
 
@@ -33,15 +42,7 @@ qt_add_resources(iptv_ui "tvmc-qml"
         "${CMAKE_SOURCE_DIR}/resources/qml/dialogs/InfoDialog.qml"
         "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvButton.qml"
         "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvSmallButton.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvCheckBox.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvComboBox.qml"
         "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvProgressBar.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvRadioButton.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvSpinBox.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvTableView.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/IptvTextField.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/RichTextComboBox.qml"
-        "${CMAKE_SOURCE_DIR}/resources/qml/IptvComponents/VideoPreview.qml"
 )
 
 target_include_directories(iptv_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/..)
