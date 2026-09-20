@@ -26,6 +26,7 @@ class AppConfig : public QObject
     Q_PROPERTY(bool mergeChannels READ mergeChannels WRITE setMergeChannels NOTIFY configChanged)
     Q_PROPERTY(bool addLogoEnabled READ addLogoEnabled WRITE setAddLogoEnabled NOTIFY configChanged)
     Q_PROPERTY(bool addHdSuffix READ addHdSuffix WRITE setAddHdSuffix NOTIFY configChanged)
+    Q_PROPERTY(QString maxExportResolution READ maxExportResolution WRITE setMaxExportResolution NOTIFY configChanged)
     Q_PROPERTY(QString fccUrl READ fccUrl WRITE setFccUrl NOTIFY configChanged)
     Q_PROPERTY(bool fccEnabled READ fccEnabled WRITE setFccEnabled NOTIFY configChanged)
 
@@ -83,6 +84,9 @@ public:
 
     bool addHdSuffix() const;
     void setAddHdSuffix(bool enabled);
+
+    QString maxExportResolution() const;
+    void setMaxExportResolution(const QString &resolution);
 
     // ==================== Manager: FCC设置 ====================
     QString fccUrl() const;

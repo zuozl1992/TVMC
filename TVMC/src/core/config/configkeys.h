@@ -22,6 +22,7 @@ constexpr const char* TV_GROUP_SELECT = "set/tv_group_select";
 constexpr const char* TV_MERGE = "set/tv_merge";
 constexpr const char* OUT_ADD_LOGO = "set/out_add_logo";
 constexpr const char* OUT_ADD_HD = "set/out_add_hd";
+constexpr const char* OUT_MAX_RES = "set/out_max_res";      ///< 导出最大清晰度
 
 // ==================== Manager: 默认值 ====================
 constexpr const char* DEFAULT_HTTP_URL = "http://192.168.1.1:12345";

@@ -424,6 +424,10 @@
         <translation>Export Quality</translation>
     </message>
     <message>
+        <source>最大清晰度:</source>
+        <translation>Max Resolution:</translation>
+    </message>
+    <message>
         <source>导出M3U</source>
         <translation>M3U</translation>
     </message>

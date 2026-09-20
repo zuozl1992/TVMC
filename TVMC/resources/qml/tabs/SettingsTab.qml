@@ -167,6 +167,23 @@ Item {
                             CheckBox { id: cbRemoveRepeat; text: qsTr("合并相同频道"); font.pixelSize: 11; implicitHeight: 22; onCheckedChanged: backend.mergeChannels = checked }
                             CheckBox { id: cbOutAddLogo; text: qsTr("导出Logo"); font.pixelSize: 11; implicitHeight: 22; onCheckedChanged: backend.addLogoEnabled = checked }
                             CheckBox { id: cbOutAddHD; text: qsTr("导出清晰度"); font.pixelSize: 11; implicitHeight: 22; onCheckedChanged: backend.addHdSuffix = checked }
+                            Label { text: qsTr("最大清晰度:"); font.pixelSize: 11 }
+                            ComboBox {
+                                id: cbMaxRes
+                                model: ["8K", "4K", "HD"]
+                                font.pixelSize: 11
+                                implicitHeight: 22
+                                implicitWidth: 60
+                                currentIndex: {
+                                    var res = backend.maxExportResolution
+                                    if (res === "HD") return 2
+                                    if (res === "4K") return 1
+                                    return 0
+                                }
+                                onActivated: function(index) {
+                                    backend.maxExportResolution = model[index]
+                                }
+                            }
                             Item { Layout.fillWidth: true }
                             IptvSmallButton { text: qsTr("导出M3U"); onClicked: saveM3uDialog.open() }
                             IptvSmallButton { text: qsTr("导出TXT"); onClicked: saveTxtDialog.open() }

@@ -424,6 +424,10 @@
         <translation>导出清晰度</translation>
     </message>
     <message>
+        <source>最大清晰度:</source>
+        <translation>最大清晰度:</translation>
+    </message>
+    <message>
         <source>导出M3U</source>
         <translation>导出M3U</translation>
     </message>

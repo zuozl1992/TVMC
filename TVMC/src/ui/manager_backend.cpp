@@ -153,6 +153,29 @@ void ManagerBackend::setMergeChannels(bool enabled) { if (m_config) m_config->se
 bool ManagerBackend::addLogoEnabled() const { return m_config ? m_config->addLogoEnabled() : false; }
 void ManagerBackend::setAddLogoEnabled(bool enabled) { if (m_config) m_config->setAddLogoEnabled(enabled); }
 bool ManagerBackend::addHdSuffix() const { return m_config ? m_config->addHdSuffix() : false; }
+QString ManagerBackend::maxExportResolution() const { return m_config ? m_config->maxExportResolution() : "8K"; }
+void ManagerBackend::setMaxExportResolution(const QString &resolution) { if (m_config) m_config->setMaxExportResolution(resolution); }
+
+//根据清晰度名称获取最大类型ID（0=TS, 1=SD, 2=HD, 3=4K, 4=8K）
+static int maxTypeFromResolution(const QString &res)
+{
+    if (res == "HD") return 2;
+    if (res == "4K") return 3;
+    return 4; // 8K 或未知值时不限制
+}
+
+//按最大清晰度过滤频道列表
+static QJsonArray filterByMaxResolution(const QJsonArray &list, int maxType)
+{
+    QJsonArray result;
+    for (const QJsonValue &val : list) {
+        QJsonObject obj = val.toObject();
+        if (obj.value("type").toInt() <= maxType) {
+            result.append(val);
+        }
+    }
+    return result;
+}
 void ManagerBackend::setAddHdSuffix(bool enabled) { if (m_config) m_config->setAddHdSuffix(enabled); }
 QString ManagerBackend::fccUrl() const { return m_config ? m_config->fccUrl() : QString(); }
 void ManagerBackend::setFccUrl(const QString &url) { if (m_config) m_config->setFccUrl(url); }
@@ -320,9 +343,13 @@ void ManagerBackend::exportM3u(const QString &filePath)
     opts.logoBaseUrl = m_config->fileUrl();
     opts.groups = m_config->selectedGroups();
 
+    //按最大清晰度过滤
+    int maxType = maxTypeFromResolution(m_config->maxExportResolution());
+
     QJsonArray channelList;
     for (const QString &group : opts.groups) {
         QJsonArray list = m_sourceRepo->getTvListByGroup(group, true);
+        list = filterByMaxResolution(list, maxType);
         for (const QJsonValue &val : list) {
             channelList.append(val);
         }
@@ -342,9 +369,13 @@ void ManagerBackend::exportTxt(const QString &filePath)
     opts.mergeChannels = m_config->mergeChannels();
     opts.groups = m_config->selectedGroups();
 
+    //按最大清晰度过滤
+    int maxType = maxTypeFromResolution(m_config->maxExportResolution());
+
     QHash<QString, QJsonArray> groupedLists;
     for (const QString &group : opts.groups) {
         QJsonArray list = m_sourceRepo->getTvListByGroup(group, false);
+        list = filterByMaxResolution(list, maxType);
         if (!list.isEmpty()) {
             groupedLists[group] = list;
         }

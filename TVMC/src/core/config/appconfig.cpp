@@ -157,6 +157,17 @@ void AppConfig::setAddHdSuffix(bool enabled)
     emit configChanged();
 }
 
+QString AppConfig::maxExportResolution() const
+{
+    return value(ConfigKeys::OUT_MAX_RES, "8K").toString();
+}
+
+void AppConfig::setMaxExportResolution(const QString &resolution)
+{
+    setValue(ConfigKeys::OUT_MAX_RES, resolution);
+    emit configChanged();
+}
+
 QString AppConfig::fccUrl() const
 {
     return value(ConfigKeys::FCC_URL, QString()).toString();
